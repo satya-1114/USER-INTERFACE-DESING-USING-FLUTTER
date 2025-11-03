@@ -1,0 +1,51 @@
+
+AIM: To write and execute a simple Dart program to understand the basic syntax, variables, input/output, and operators in Dart.
+DESCRIPTION:
+Dart is an open-source, object-oriented programming language developed by Google.
+It is used to build mobile, web, and desktop apps — mainly with Flutter.
+Dart uses a simple syntax similar to C, Java, or JavaScript.
+Key features:
+•	Strongly typed language
+•	Supports object-oriented programming (classes and objects)
+•	Supports functions and async programming
+PROGRAM:
+
+// Simple Dart Program: Basic Syntax Example
+
+import 'dart:io';
+
+void main() {
+  // Display a message
+  print("Welcome to Dart Programming!");
+
+  // Taking user input
+  stdout.write("Enter your name: ");
+  String? name = stdin.readLineSync();
+
+  // Variables and data types
+  int age = 20;
+  double height = 5.9;
+  bool isStudent = true;
+
+  print("Hello, $name!");
+  print("Age: $age");
+  print("Height: $height feet");
+  print("Student: $isStudent");
+
+  // Simple calculation
+  int a = 10, b = 5;
+  int sum = a + b;
+  print("Sum of $a and $b is $sum");
+}
+
+OUTPUT:
+
+Welcome to Dart Programming!
+Enter your name: Siva
+Hello, Siva!
+Age: 20
+Height: 5.9 feet
+Student: true
+Sum of 10 and 5 is 15
+
+
