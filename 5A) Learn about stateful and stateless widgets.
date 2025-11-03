@@ -1,0 +1,94 @@
+
+
+AIM:
+To understand and implement Stateful and Stateless widgets in Flutter.
+
+DESCRIPTION:
+•	Stateless Widget: The UI does not change when user interacts.
+•	Stateful Widget: The UI changes dynamically based on user interaction.
+
+PROGRAM:.
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(JuiceShopApp());
+}
+
+class JuiceShopApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Fresh Juice Shop',
+      home: JuiceMenu(),
+    );
+  }
+}
+
+// 🟩 Stateless Widget Example
+class JuiceMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("🍊 Fresh Juice Shop")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Welcome to Fresh Juice Shop!", style: TextStyle(fontSize: 18)),
+            SizedBox(height: 10),
+            Text("Available Juice: Mango, Orange, Apple"),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OrderCounter()),
+                );
+              },
+              child: Text("Go to Order Counter"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// 🟦 Stateful Widget Example
+class OrderCounter extends StatefulWidget {
+  @override
+  _OrderCounterState createState() => _OrderCounterState();
+}
+
+class _OrderCounterState extends State<OrderCounter> {
+  int orderCount = 0;
+
+  void addOrder() {
+    setState(() {
+      orderCount++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("🧃 Order Counter")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Total Juice Orders:", style: TextStyle(fontSize: 18)),
+            SizedBox(height: 10),
+            Text("$orderCount", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: addOrder,
+              child: Text("Add One Order"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
