@@ -1,0 +1,80 @@
+
+
+AIM:
+To design and implement different layout structures in Flutter using Row, Column, and Stack widgets.
+
+DESCRIPTION:
+
+Flutter layouts are built using widgets.
+Three of the most common layout widgets are:
+Widget	Description
+Row    -	Arranges widgets horizontally in a single line.
+Column -	Arranges widgets vertically in a single column.
+Stack   -	Places widgets on top of each other (like layers).
+These widgets help organize UI elements efficiently in an app.
+
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(ColorLayouts());
+}
+
+class ColorLayouts extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text("Row, Column & Stack Example")),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              // 1️⃣ Row Example
+              Text("Row Example"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(width: 50, height: 50, color: Colors.red),
+                  SizedBox(width: 10),
+                  Container(width: 50, height: 50, color: Colors.green),
+                  SizedBox(width: 10),
+                  Container(width: 50, height: 50, color: Colors.blue),
+                ],
+              ),
+
+              SizedBox(height: 30),
+
+              // 2️⃣ Column Example
+              Text("Column Example"),
+              Column(
+                children: [
+                  Container(width: 50, height: 50, color: Colors.orange),
+                  SizedBox(height: 10),
+                  Container(width: 50, height: 50, color: Colors.purple),
+                  SizedBox(height: 10),
+                  Container(width: 50, height: 50, color: Colors.yellow),
+                ],
+              ),
+
+              SizedBox(height: 30),
+
+              // 3️⃣ Stack Example
+              Text("Stack Example"),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(width: 120, height: 120, color: Colors.grey),
+                  Container(width: 80, height: 80, color: Colors.lightBlue),
+                  Container(width: 40, height: 40, color: Colors.white),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
