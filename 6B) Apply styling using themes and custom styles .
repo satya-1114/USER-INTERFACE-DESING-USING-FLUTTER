@@ -1,0 +1,83 @@
+
+
+AIM:To apply styling using themes and custom styles
+
+DESCRIPTION: 
+In Flutter, themes and custom styles define the overall look and feel of an app.
+By using the ThemeData class, developers can set global colors, text styles, and button appearances.
+This ensures consistency across all screens and makes the UI easier to maintain and customize.
+
+PROGRAM:.
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(HospitalApp());
+}
+
+class HospitalApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hospital Management',
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+        textTheme: TextTheme(
+          headline6: TextStyle(
+              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.teal),
+          bodyText2: TextStyle(fontSize: 16, color: Colors.black87),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.teal,
+            foregroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+        ),
+      ),
+      home: HospitalHome(),
+    );
+  }
+}
+
+class HospitalHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("CityCare Hospital 🏥"),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Card(
+          elevation: 6,
+          margin: EdgeInsets.all(20),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Welcome to CityCare Hospital",
+                    style: Theme.of(context).textTheme.headline6),
+                SizedBox(height: 10),
+                Text(
+                  "Your health is our priority. We provide 24/7 emergency and outpatient services.",
+                  style: Theme.of(context).textTheme.bodyText2,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 15),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Book Appointment"),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
