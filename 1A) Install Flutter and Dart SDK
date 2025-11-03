@@ -1,0 +1,43 @@
+
+
+AIM:To Install Flutter and Dart SDK
+
+DESCRIPTION:
+
+Flutter is an open-source UI framework by Google for building native mobile, web, and desktop apps from a single codebase.
+Dart is the programming language used to develop Flutter applications.
+To run Flutter, we need to install both Flutter SDK and Dart SDK.
+
+Procedure:
+ Step 1: Install Git
+•	Download Git from https://git-scm.com/downloads
+•	Install and set the path variable.
+Step 2: Download Flutter SDK
+•	Go to https://flutter.dev/docs/get-strated/install
+•	Download the Flutter SDK zip file.
+•	Extract it to a location (Example: C:\src\flutter).
+Step 3: Set Environment Variable
+•	Open Environment Variables → Under User variables, click New →
+Variable name: Path
+Variable value: C:\src\flutter\bin
+•	Click OK.
+Step 4: Verify Installation
+•	Open Command Prompt → Type:flutter –version
+•	It will show the installed Flutter and Dart versions.
+Step 5: Install Android Studio / VS Code
+•	Install Android Studio or Visual Studio Code.
+•	Add Flutter and Dart plugins from the Extensions Marketplace.
+Step 6: Run Doctor Command
+•	In terminal, type:flutter doctor
+•	It checks the setup and shows if any dependencies are missing.
+Output / Result:
+
+After running flutter doctor, you’ll get output like this:
+•	Doctor summary (to see all details, run flutter doctor -v):
+•	[√] Flutter (Channel stable, 3.24.0, on Microsoft Windows [Version 10.0.26100])
+•	[√] Android toolchain - develop for Android devices
+•	[√] Chrome - develop for the web
+•	[√] Visual Studio Code (version 1.91.2)
+•	[√] Connected device (3 available)
+•	
+•	• no issues found 
