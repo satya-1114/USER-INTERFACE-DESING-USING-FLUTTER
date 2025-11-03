@@ -1,0 +1,75 @@
+
+
+AIM:
+To implement MediaQuery and breakpoints in Flutter to make the user interface responsive across different screen sizes.
+
+DESCRIPTION: 
+
+This experiment demonstrates how to use MediaQuery to get screen width and apply breakpoints (specific width ranges) to adjust UI layout dynamically.
+We create a simple Library Info App 📚 that changes its background color and text size depending on the device width:
+•	Small screen (mobile): Green background
+•	Medium screen (tablet): Blue background
+•	Large screen (desktop): Purple background
+
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyLibraryApp());
+}
+
+class MyLibraryApp extends StatelessWidget {
+  const MyLibraryApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Library Info',
+      home: Scaffold(
+        appBar: AppBar(title: const Text("Library Info")),
+        body: const ResponsiveLibrary(),
+      ),
+    );
+  }
+}
+
+class ResponsiveLibrary extends StatelessWidget {
+  const ResponsiveLibrary({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Getting screen width using MediaQuery
+    double width = MediaQuery.of(context).size.width;
+
+    // Setting colors and text size based on breakpoints
+    Color bgColor;
+    double fontSize;
+
+    if (width < 600) {
+      bgColor = Colors.greenAccent;
+      fontSize = 18;
+    } else if (width < 1000) {
+      bgColor = Colors.lightBlueAccent;
+      fontSize = 22;
+    } else {
+      bgColor = Colors.deepPurpleAccent;
+      fontSize = 26;
+    }
+
+    return Container(
+      color: bgColor,
+      child: Center(
+        child: Text(
+          "📚 Welcome to College Library!",
+          style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+   );
+  }
+}
