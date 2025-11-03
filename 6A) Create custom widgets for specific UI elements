@@ -1,0 +1,76 @@
+
+AIM: To create and use custom widgets for specific UI elements in Flutter.
+
+DESCRIPTION:
+Custom widgets help build reusable components in Flutter.
+In this example, we’ll create a TravelCard widget that shows trip details (destination, location, and price) like in MakeMyTrip.
+
+PROGRAM:.
+
+ import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MakeMyTripApp()));
+}
+
+class MakeMyTripApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("✈️ MakeMyTrip Packages")),
+      body: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          TravelCard(
+            place: "Goa Beach",
+            location: "Goa, India",
+            price: 5500,
+          ),
+          TravelCard(
+            place: "Manali Hills",
+            location: "Himachal Pradesh, India",
+            price: 8000,
+          ),
+          TravelCard(
+            place: "Kerala Backwaters",
+            location: "Alleppey, India",
+            price: 7000,
+          ),
+          TravelCard(
+            place: "Jaipur Palace",
+            location: "Rajasthan, India",
+            price: 6000,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 🟢 Custom Widget
+class TravelCard extends StatelessWidget {
+  final String place;
+  final String location;
+  final int price;
+
+  const TravelCard({
+    required this.place,
+    required this.location,
+    required this.price,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.lightBlue[50],
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: ListTile(
+        leading: Icon(Icons.flight_takeoff, color: Colors.blueAccent),
+        title: Text(place, style: TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text("Location: $location\nPrice: ₹$price"),
+        trailing: Icon(Icons.arrow_forward_ios, size: 18),
+      ),
+    );
+  }
+}
+
