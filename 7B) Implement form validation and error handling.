@@ -1,0 +1,97 @@
+
+
+AIM:To implement form validation and error handling
+
+DESCRIPTION: 
+>Form validation is used to check user input before submission.
+>It ensures that all required fields are filled correctly and prevents errors.
+>In this program, validation checks whether the name and email fields are empty or invalid.
+>If an error occurs, a message is shown below the input field.
+>When all inputs are valid, a success message is displayed using a SnackBar.
+>This improves app reliability and provides a better user experience.
+
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Form Validation',
+      home: FormValidationExample(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class FormValidationExample extends StatefulWidget {
+  @override
+  _FormValidationExampleState createState() => _FormValidationExampleState();
+}
+
+class _FormValidationExampleState extends State<FormValidationExample> {
+  final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Form Validation'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your name';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  } else if (!value.contains('@')) {
+                    return 'Enter a valid email';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Form Submitted Successfully!')),
+                    );
+                  }
+                },
+                child: Text('Submit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
