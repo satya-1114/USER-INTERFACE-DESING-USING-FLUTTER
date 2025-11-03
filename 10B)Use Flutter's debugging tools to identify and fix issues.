@@ -1,0 +1,77 @@
+
+
+AIM:To use Flutter's debugging tools to identify and fix issues.
+
+DESCRIPTION:
+>Debugging in Flutter helps developers find and fix errors in their apps.
+>Tools like print(), debugPrint(), and the Flutter DevTools console are used for debugging.
+>Developers can check variable values, UI issues, and logic errors using these tools.
+>When an error occurs, Flutter shows error messages in the debug console to locate the problem.
+>After identifying the issue, developers modify the code and re-run the app to confirm the fix.
+>Debugging ensures the app works smoothly and correctly without unexpected behavior.
+
+PROGRAM:
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(DebugLoginApp());
+}
+
+class DebugLoginApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: LoginPage(),
+    );
+  }
+}
+
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String username = "";
+
+  void login() {
+    // 🐞 Bug: Trying to print username before user enters it properly
+    print("Login button pressed!");
+    print("Entered username: $username");
+
+    if (username.isEmpty) {
+      print("Error: Username field is empty!"); // Debug message
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Debugging Login Page")),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              decoration: InputDecoration(labelText: "Enter Username"),
+              onChanged: (value) {
+                username = value; // 🐞 Missing setState() for real-time updates
+                print("Username changed: $username");
+              },
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: login,
+              child: Text("Login"),
+            ),
+            SizedBox(height: 20),
+            Text("Username: $username", style: TextStyle(fontSize: 20)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
