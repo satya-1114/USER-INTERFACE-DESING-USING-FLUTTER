@@ -1,0 +1,90 @@
+
+AIM:
+
+To implement navigation between multiple screens using named routes in Flutter.
+
+DESCRIPTION:
+In this example, we design a simple BVC Canteen App 🍔 where users can move between screens using named routes.
+•	Home Screen: Displays a welcome message and a button to go to the Menu.
+•	Menu Screen: Displays some food items and a button to go back home.
+Navigation happens using route names like '/' and '/menu'.
+
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyCanteenApp());
+}
+
+class MyCanteenApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'BVC Canteen App',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/menu': (context) => MenuScreen(),
+      },
+    );
+  }
+}
+
+// ---------------- Home Screen ----------------
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Canteen Home")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "🍴 Welcome to BVC Canteen!",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/menu');
+              },
+              child: Text("View Menu"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ---------------- Menu Screen ----------------
+class MenuScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Today's Menu")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "🍔 Burger - ₹80\n☕ Coffee - ₹40\n🍕 Pizza - ₹120",
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 25),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              },
+              child: Text("Back to Home"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
