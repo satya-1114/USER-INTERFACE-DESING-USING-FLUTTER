@@ -1,0 +1,59 @@
+
+
+AIM:To understand how to manage app state in Flutter using setState() and Provider.
+
+DESCRIPTION:
+•	setState(): Used for simple local state updates inside a widget.
+•	Provider: Used for app-wide state management — helps share data between multiple widgets efficiently.
+
+PROGRAM:.
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: BulbOnOff()));
+}
+
+class BulbOnOff extends StatefulWidget {
+  @override
+  _BulbOnOffState createState() => _BulbOnOffState();
+}
+
+class _BulbOnOffState extends State<BulbOnOff> {
+  bool isOn = false; // initial bulb state
+
+  void toggleBulb() {
+    setState(() {
+      isOn = !isOn; // toggle the state
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("💡 Bulb ON/OFF Example")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.lightbulb,
+              color: isOn ? Colors.yellow : Colors.grey,
+              size: 100,
+            ),
+            SizedBox(height: 20),
+            Text(
+              isOn ? "Bulb is ON" : "Bulb is OFF",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: toggleBulb,
+              child: Text(isOn ? "Turn OFF" : "Turn ON"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+} 
