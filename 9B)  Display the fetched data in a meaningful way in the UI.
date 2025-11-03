@@ -1,0 +1,82 @@
+
+
+AIM:To display the fetched data in a meaningful way in the UI.
+
+DESCRIPTION: 
+>After fetching data from an API, it should be shown clearly to users.
+>We can use widgets like ListView, Card, and Text to make it attractive.
+>This example displays a list of posts from an online API.
+>Each post is shown in a card layout with title and body.
+
+PROGRAM:
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() => runApp(UserDisplayApp());
+
+class UserDisplayApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: UserListScreen(),
+    );
+  }
+}
+
+class UserListScreen extends StatefulWidget {
+  @override
+  _UserListScreenState createState() => _UserListScreenState();
+}
+
+class _UserListScreenState extends State<UserListScreen> {
+  List users = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUsers();
+  }
+
+  Future<void> fetchUsers() async {
+    final response =
+        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
+
+    if (response.statusCode == 200) {
+      setState(() {
+        // Take only first 4 users
+        users = json.decode(response.body).take(4).toList();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("User List (4 Users)")),
+      body: users.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                final user = users[index];
+                return Card(
+                  margin: EdgeInsets.all(8),
+                  elevation: 3,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.blueAccent,
+                      child: Text(user['name'][0]),
+                    ),
+                    title: Text(user['name'],
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(
+                        "Email: ${user['email']}\nPhone: ${user['phone']}"),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}
+
