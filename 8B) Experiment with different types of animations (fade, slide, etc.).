@@ -1,0 +1,94 @@
+
+AIM:To experiment with different types of animations (fade, slide, etc.).
+
+DESCRIPTION: 
+>This program demonstrates two types of animations – Fade and Slide.
+>AnimatedOpacity is used to create a fade-in/fade-out effect.
+>AnimatedContainer with margin change is used for sliding animation.
+>The setState() method updates the widget’s visibility and position.
+>Duration controls how long each animation takes.
+>The program shows how to make UI elements move and fade smoothly.
+>Such animations make the app more dynamic and visually attractive.
+ 
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Different Animations',
+      home: AnimationExample(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class AnimationExample extends StatefulWidget {
+  @override
+  _AnimationExampleState createState() => _AnimationExampleState();
+}
+
+class _AnimationExampleState extends State<AnimationExample> {
+  bool _visible = true;
+  bool _moved = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Fade & Slide Animation')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Fade Animation
+            AnimatedOpacity(
+              opacity: _visible ? 1.0 : 0.0,
+              duration: Duration(seconds: 1),
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.blue,
+              ),
+            ),
+            SizedBox(height: 40),
+
+            // Slide Animation
+            AnimatedContainer(
+              duration: Duration(seconds: 1),
+              margin: EdgeInsets.only(left: _moved ? 150 : 0),
+              width: 100,
+              height: 100,
+              color: Colors.green,
+            ),
+            SizedBox(height: 40),
+
+            // Buttons
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _visible = !_visible; // toggle fade
+                });
+              },
+              child: Text('Fade Animation'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _moved = !_moved; // toggle slide
+                });
+              },
+              child: Text('Slide Animation'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+OU
