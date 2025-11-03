@@ -1,0 +1,73 @@
+
+
+AIM:To write unit tests for UI components
+
+DESCRIPTION: 
+>Unit testing checks if small parts of your Flutter app (like buttons, text fields, or widgets) work correctly.
+>It helps to find mistakes early before the app runs on a real device.
+>You use Flutter’s flutter_test package for writing tests.
+>Example: Testing if a Login Screen button and text are displayed correctly.
+
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(ProductApp());
+}
+
+class ProductApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ProductScreen(),
+    );
+  }
+}
+
+class ProductScreen extends StatelessWidget {
+  final String productName = "Wireless Headphones";
+  final double price = 2499.00;
+  final String description =
+      "High-quality Bluetooth headphones with noise cancellation and long battery life.";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Product Details")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(
+              'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400',
+              height: 200,
+            ),
+            SizedBox(height: 20),
+            Text(
+              productName,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text("₹$price", style: TextStyle(fontSize: 20, color: Colors.green)),
+            SizedBox(height: 10),
+            Text(description, style: TextStyle(fontSize: 16)),
+            SizedBox(height: 20),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Added to Cart!')),
+                  );
+                },
+                child: Text('Add to Cart'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
