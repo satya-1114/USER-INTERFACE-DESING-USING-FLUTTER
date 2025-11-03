@@ -1,0 +1,72 @@
+
+
+AIM:To learn about stateful and stateless widgets.
+
+DESCRIPTION: 
+
+>This program adds simple animation using the AnimatedContainer widget.
+>The button’s width and color change smoothly when pressed.
+>setState() is used to update the UI values.
+>AnimatedContainer automatically animates changes in its properties.
+>The duration property controls how long the animation lasts.
+>It shows how to make UI elements more interactive and visually appealing.
+
+PROGRAM:
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Animated Button',
+      home: AnimatedButtonExample(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class AnimatedButtonExample extends StatefulWidget {
+  @override
+  _AnimatedButtonExampleState createState() => _AnimatedButtonExampleState();
+}
+
+class _AnimatedButtonExampleState extends State<AnimatedButtonExample> {
+  double _width = 150;
+  Color _color = Colors.blue;
+
+  void _animateButton() {
+    setState(() {
+      _width = _width == 150 ? 250 : 150; // change width
+      _color = _color == Colors.blue ? Colors.green : Colors.blue; // change color
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Animated Button Example')),
+      body: Center(
+        child: AnimatedContainer(
+          duration: Duration(seconds: 1),
+          width: _width,
+          height: 60,
+          decoration: BoxDecoration(
+            color: _color,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: TextButton(
+            onPressed: _animateButton,
+            child: Text(
+              'Click Me',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
