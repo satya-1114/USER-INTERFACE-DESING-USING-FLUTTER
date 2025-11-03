@@ -1,0 +1,70 @@
+
+AIM:
+To design a Flutter user interface that adapts automatically to different screen sizes such as mobile, tablet, and desktop.
+
+DESCRIPTION: 
+In this experiment, we create a simple Cafeteria Menu app that displays menu items differently depending on the screen width.
+•	On small screens (mobile), items appear in a single column.
+•	On large screens (tablet/desktop), items appear in two columns.
+We use the LayoutBuilder widget to detect screen width and change layout dynamically.
+
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyCafeteriaApp());
+}
+
+class MyCafeteriaApp extends StatelessWidget {
+  const MyCafeteriaApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Cafeteria Menu',
+      home: Scaffold(
+        appBar: AppBar(title: const Text("Cafeteria Menu")),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            // If width < 600 → small screen → single column
+            if (constraints.maxWidth < 600) {
+              return ListView(
+                children: [
+                  menuCard("🍔 Burger", "₹80"),
+                  menuCard("🍕 Pizza", "₹120"),
+                  menuCard("☕ Coffee", "₹50"),
+                ],
+              );
+            } 
+            // If width >= 600 → large screen → two columns
+            else {
+              return GridView.count(
+                crossAxisCount: 2,
+                children: [
+                  menuCard("🍔 Burger", "₹80"),
+                  menuCard("🍕 Pizza", "₹120"),
+                  menuCard("☕ Coffee", "₹50"),
+                  menuCard("🥗 Salad", "₹70"),
+                ],
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget menuCard(String item, String price) {
+    return Card(
+      color: Colors.orange.shade100,
+      margin: const EdgeInsets.all(10),
+      child: Center(
+        child: Text(
+          "$item - $price",
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
