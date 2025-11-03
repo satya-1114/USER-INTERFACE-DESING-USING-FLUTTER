@@ -1,0 +1,79 @@
+
+AIM: To explore and understand the use of basic Flutter widgets such as Text, Image, Container, Column, and Row.
+
+DESCRIPTION:
+
+In Flutter, everything is a widget — including layout elements, text, images, and buttons.
+Widgets describe what the UI should look like and how it should behave.
+Common Flutter Widgets:
+Widget   -	Description
+Text       -	Displays a string of text on the screen.
+Image    -	Displays an image from assets, network, or file.
+Container	- A box model widget that can have padding, margin, border, and color.
+Column   -	Arranges widgets vertically.
+
+
+	Row-Arranges widgets horizontally.
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Widget Demo',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter Basic Widgets'),
+          backgroundColor: Colors.teal,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Text Widget
+              Text(
+                'Hello, Flutter!',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+
+              SizedBox(height: 20),
+
+              // Image Widget (from network)
+              Image.network(
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                width: 150,
+              ),
+
+              SizedBox(height: 20),
+
+              // Container Widget
+              Container(
+                height: 100,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: Colors.black, width: 2),
+                ),
+                child: Center(
+                  child: Text(
+                    'I am inside a Container!',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
