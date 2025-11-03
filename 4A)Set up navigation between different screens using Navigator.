@@ -1,0 +1,88 @@
+
+
+ AIM:
+To implement navigation between multiple screens in a Flutter application using the Navigator class.
+
+DESCRIPTION: 
+In this experiment, we create a simple College App 🏫 with two screens:
+1.	Home Screen – displays a welcome message and a button to go to the “About College” page.
+2.	About Screen – shows basic details about the college and a button to go back to the home screen.
+We use Navigator.push() to move to the new screen and Navigator.pop() to return to the previous one.
+
+PROGRAM:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyCollegeApp());
+}
+
+class MyCollegeApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'BVC College App',
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Home Page")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "🏫 Welcome to BVC Engineering College!",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutScreen()),
+                );
+              },
+              child: Text("Go to About Page"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AboutScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("About College")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "📚 BVC Engineering College was established in 1995.\n"
+              "Offers CSE, ECE, MECH, and CIVIL branches.",
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Back to Home"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
