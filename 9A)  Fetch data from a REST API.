@@ -1,0 +1,65 @@
+
+ AIM:To fetch data from a REST API.
+
+DESCRIPTION: 
+>REST API helps apps get or send data through the internet.
+>Flutter can fetch API data using the http package.
+>Data is usually in JSON format (JavaScript Object Notation).
+>After fetching, we can display it in the app UI.
+>This is useful for showing live or online data (e.g., weather, users list).
+
+PROGRAM:
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() => runApp(ApiExampleApp());
+
+class ApiExampleApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: FetchDataExample(),
+    );
+  }
+}
+
+class FetchDataExample extends StatefulWidget {
+  @override
+  _FetchDataExampleState createState() => _FetchDataExampleState();
+}
+
+class _FetchDataExampleState extends State<FetchDataExample> {
+  String result = "Fetching data...";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users/1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        result = "Name: ${data['name']}\nEmail: ${data['email']}";
+      });
+    } else {
+      setState(() {
+        result = "Failed to load data";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Fetch Data Example")),
+      body: Center(
+        child: Text(result, textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
+      ),
+    );
+  }
+}
